@@ -17,22 +17,21 @@ public class JpaMain {
 
 
         try {
-//            Member member = new Member();
-//            member.setId(2L);
-//            member.setName("A~yoHello");
-//            em.persist(member);
+            //비영속
+            Member member = new Member();
+            member.setId(2L);
+            member.setName("A~yoHello");
 
-//            Member findMember = em.find(Member.class,1L);
-//            findMember.setName("YOYOYOYO");
-//            System.out.println("findMemberId = " + findMember.getId());
-//            System.out.println("findMemberName = " + findMember.getName());
 
-            List<Member> members = em.createQuery("select m from Member as m", Member.class)
-                                .getResultList();
+            //영속
+            System.out.println("===before persist====");
+            em.persist(member);
+            System.out.println("===after persist====");
 
-            for (Member member : members) {
-                System.out.println("Name: " + member.getName());
-            }
+            //selct문 안나감 위에 persist를 했으므로 db가 아닌 1차캐시에서 가져온다
+            Member findMember = em.find(Member.class, 2L);
+            System.out.println("findMember ID" + findMember.getName());
+            System.out.println("findMember name" + findMember.getName());
 
             tx.commit();
         } catch (Exception e) {
