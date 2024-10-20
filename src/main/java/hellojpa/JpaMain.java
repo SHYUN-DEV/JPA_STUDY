@@ -19,11 +19,12 @@ public class JpaMain {
         try {
 
             Member member = new Member(200L, "num200");
-            em.persist(member);
+            member.setName("AAAAA");
 
-            em.flush();
+            em.detach(member);
+            //영속성 컨텍스트 완전 초기화
+            //em.clear();
 
-            System.out.println("===================");
 
             tx.commit();
         } catch (Exception e) {
