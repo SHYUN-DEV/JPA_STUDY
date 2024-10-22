@@ -17,14 +17,12 @@ public class JpaMain {
 
 
         try {
+            Member member = new Member();
+            member.setId(2L);
+            member.setUserName("B");
+            member.setRoleType(RoleType.ADMIN);
 
-            Member member = new Member(200L, "num200");
-            member.setName("AAAAA");
-
-            em.detach(member);
-            //영속성 컨텍스트 완전 초기화
-            //em.clear();
-
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
